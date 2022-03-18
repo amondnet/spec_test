@@ -8,15 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          submodules: true
       - uses: dart-lang/setup-dart@v1
       - name: Install dependencies
-        run: dart pub get      
-      #- uses: subosito/flutter-action@v2
-      #  with:
-      #    flutter-version: ${{ env.FLUTTER_VERSION }}
-      #    channel: ${{ env.FLUTTER_CHANNEL }}
-      #    cache: true
+        run: dart pub get
       - run: |
-          dart pub global activate spec_cli
+          dart pub global activate --source path spec/packages/spec_cli
       - run: |
           spec --coverage --ci
